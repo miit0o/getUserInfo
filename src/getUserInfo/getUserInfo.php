@@ -68,9 +68,65 @@ function gui_get_os() {
 	return $os_platform;
 }
 
+function gui_get_device_type() {
+	$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	if (strpos($user_agent, 'iPhone') !== false) {
+		return 'iPhone';
+	} elseif (strpos($user_agent, 'iPad') !== false) {
+		return 'iPad';
+	} elseif (strpos($user_agent, 'Android') !== false) {
+		return 'Android';
+	} elseif (strpos($user_agent, 'Windows Phone') !== false) {
+		return 'Windows Phone';
+	} elseif (strpos($user_agent, 'BlackBerry') !== false) {
+		return 'BlackBerry';
+	} elseif (strpos($user_agent, 'Macintosh') !== false) {
+		return 'Macintosh';
+	} elseif (strpos($user_agent, 'Windows') !== false) {
+		return 'Windows PC';
+	} elseif (strpos($user_agent, 'Linux') !== false) {
+		return 'Linux PC';
+	} else {
+		return 'Unknown';
+	}
+}
+
+function gui_get_browser() {
+	$user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+	$browser = "Unknown";
+
+	if (preg_match('/MSIE/i', $user_agent) && !preg_match('/Opera/i', $user_agent)) {
+		$browser = 'Internet Explorer';
+	} elseif (preg_match('/Firefox/i', $user_agent)) {
+		$browser = 'Mozilla Firefox';
+	} elseif (preg_match('/Chrome/i', $user_agent)) {
+		$browser = 'Google Chrome';
+	} elseif (preg_match('/Safari/i', $user_agent)) {
+		$browser = 'Apple Safari';
+	} elseif (preg_match('/Opera/i', $user_agent)) {
+		$browser = 'Opera';
+	} elseif (preg_match('/Netscape/i', $user_agent)) {
+		$browser = 'Netscape';
+	}
+
+	return $browser;
+}
+
+function gui_get_screen_resolution() {
+	$resolution = "Unknown";
+	if(isset($_COOKIE['screen_resolution'])){
+		$resolution = $_COOKIE['screen_resolution'];
+	}
+	return $resolution;
+}
+
 
 add_shortcode('gui_show_ip', 'gui_get_ip');
 add_shortcode('gui_show_hostname', 'gui_get_hostname');
 add_shortcode('gui_show_os', 'gui_get_os');
+add_shortcode('gui_show_device', 'gui_get_device_type');
+add_shortcode('gui_show_browser', 'gui_get_browser');
+add_shortcode('gui_show_resolution', 'gui_get_screen_resolution');
 	
 ?>
