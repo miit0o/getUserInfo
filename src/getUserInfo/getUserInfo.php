@@ -113,20 +113,11 @@ function gui_get_browser() {
 	return $browser;
 }
 
-function gui_get_screen_resolution() {
-	$resolution = "Unknown";
-	if(isset($_COOKIE['screen_resolution'])){
-		$resolution = $_COOKIE['screen_resolution'];
-	}
-	return $resolution;
-}
-
 
 add_shortcode('gui_show_ip', 'gui_get_ip');
 add_shortcode('gui_show_hostname', 'gui_get_hostname');
 add_shortcode('gui_show_os', 'gui_get_os');
 add_shortcode('gui_show_device', 'gui_get_device_type');
 add_shortcode('gui_show_browser', 'gui_get_browser');
-add_shortcode('gui_show_resolution', 'gui_get_screen_resolution');
 	
 ?>
